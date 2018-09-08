@@ -49,7 +49,6 @@ class App extends Component {
     })
   }
 
-
   componentDidMount() {
     this.getWeatherDetails();
     this.getDailyBreakUp();
@@ -103,13 +102,13 @@ class App extends Component {
     return (
       <div style={{textAlign: 'center'}}>
           <div>
-            <h1> Weather Forecast </h1> <sup>o</sup>C
+            <h1> Weather Forecast Kolkata, India</h1> &#8451;
             <Switch
               value={this.state.units}
               onChange={this.onScaleSwitch.bind(this)}
               color="primary"
             />
-            <sup>o</sup>F
+            &#8457;
           </div>
         <div style={{backgroundColor: '#ffffff', display: 'flex', alignItems: 'flex-start', padding: 32}}>
             {cards}

@@ -12,11 +12,11 @@ export default class Util {
   static getScale(unit) {
     const scaleMap= {
       'metric': {
-        'temp': 'C',
+        'temp': '\u2103',
         'wind': 'm/sec'
       },
       'imperial': {
-        'temp': 'F',
+        'temp': '\u2109',
         'wind': 'miles/hr'
       }
     }

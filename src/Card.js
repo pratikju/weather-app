@@ -43,23 +43,23 @@ function SimpleCard(props) {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary">
-          {props.city}
-        </Typography>
         <Typography variant="headline" component="h2">
           {dateObj.date}
         </Typography>
         <Typography variant="subheading">
           {dateObj.day}
         </Typography>
+        <Typography variant="display1">
+          {data.temp.max.toFixed(0)}<sup style={{fontSize: 16}}>{scale.temp}</sup>
+          <div style={{fontSize: 16, display: 'inline-block'}}>/ {data.temp.min.toFixed(0)}{scale.temp}</div>
+        </Typography>
+
         <Typography variant="caption" gutterBottom>
           <img id="wicon" src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather icon" /><br/>
           {data.weather[0].description}
         </Typography>
 
         <Typography component="p">
-          Day {data.temp.day}<sup>o</sup>{scale.temp} {bull} Night {data.temp.night}<sup>o</sup>{scale.temp}
-          <br/>
           humidity: {data.humidity}% <br/>
           wind: {data.speed} {scale.wind}<br/>
         </Typography>
