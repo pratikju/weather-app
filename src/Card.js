@@ -65,7 +65,7 @@ function SimpleCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">See More</Button>
+        <Button size="small" color="primary" onClick={props.onClick}>See Hourly</Button>
       </CardActions>
     </Card>
   );
