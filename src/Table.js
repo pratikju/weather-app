@@ -34,7 +34,7 @@ function SimpleTable(props) {
             </TableCell>
 
             {props.data.map( d => {
-              return (<TableCell numeric>{Util.getHour(d.dt)}</TableCell>)
+              return (<TableCell key={`hours_${d.dt}`} numeric>{Util.getHour(d.dt)}</TableCell>)
             })}
           </TableRow>
         </TableHead>
@@ -43,7 +43,7 @@ function SimpleTable(props) {
                 <TableCell component="th" scope="row">
                 </TableCell>
                 {props.data.map( d => {
-                  return (<TableCell numeric>
+                  return (<TableCell key={`icon_${d.dt}`} numeric>
                     <img src={`http://openweathermap.org/img/w/${d.weather[0].icon}.png`} alt="Weather icon" />
                   </TableCell>)
                 })}
@@ -53,7 +53,7 @@ function SimpleTable(props) {
                 {'Forecast'}
               </TableCell>
                 {props.data.map( d => {
-                  return <TableCell numeric>{d.weather[0].description}</TableCell>
+                  return <TableCell key={`forecast_${d.dt}`}  numeric>{d.weather[0].description}</TableCell>
                 })}
             </TableRow>
             <TableRow>
@@ -61,7 +61,7 @@ function SimpleTable(props) {
                 {'Temp'} ({scale.temp})
               </TableCell>
                 {props.data.map( d => {
-                  return <TableCell numeric>{d.main.temp.toFixed(0)}&deg;</TableCell>
+                  return <TableCell key={`temp_${d.dt}`} numeric>{d.main.temp.toFixed(0)}&deg;</TableCell>
                 })}
             </TableRow>
             <TableRow>
@@ -69,7 +69,7 @@ function SimpleTable(props) {
                 {'Humidity'}
               </TableCell>
                 {props.data.map( d => {
-                  return <TableCell numeric>{d.main.humidity}%</TableCell>
+                  return <TableCell key={`humidity_${d.dt}`} numeric>{d.main.humidity}%</TableCell>
                 })}
             </TableRow>
             <TableRow>
@@ -77,7 +77,7 @@ function SimpleTable(props) {
                 {'Wind'} ({scale.wind})
               </TableCell>
                 {props.data.map( d => {
-                  return <TableCell numeric>{d.wind.speed}</TableCell>
+                  return <TableCell key={`wind_${d.dt}`} numeric>{d.wind.speed}</TableCell>
                 })}
             </TableRow>
 

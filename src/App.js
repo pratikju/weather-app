@@ -3,6 +3,8 @@ import axios from 'axios';
 import Card from './Card';
 import Switch from '@material-ui/core/Switch';
 import SimpleTable from './Table';
+import Button from '@material-ui/core/Button';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 const api = axios.create({
   baseURL: "http://api.openweathermap.org/data/2.5/",
@@ -17,6 +19,7 @@ export default class App extends Component {
       units: 'metric',
       error: false,
       showBreakdown: false,
+      currentBreakdown: 0,
       breakdownData: undefined,
       hourlyForecastData: undefined
     }
@@ -43,7 +46,11 @@ export default class App extends Component {
         units: this.state.units,
       }
     }).then((res) => {
-        this.setState({hourlyForecastData: res.data.list})
+        return this.setState({hourlyForecastData: res.data.list})
+    }).then(() => {
+        if (this.state.showBreakdown) {
+          this.seeHourly(this.state.currentBreakdown);
+        }
     }).catch((ex) => {
         this.setState({error: true});
     })
@@ -55,13 +62,13 @@ export default class App extends Component {
       'metric': 'imperial',
       'imperial': 'metric'
     }
-    this.setState({units: toggler[units], showBreakdown: false}, () => {
+    this.setState({units: toggler[units]}, () => {
       this.getDailyBreakup();
       this.getHourlyBreakUp();
     });
   }
 
-  onClickSeeMore(val) {
+  seeHourly(val) {
     const {hourlyForecastData} = this.state;
     const curr_day = (new Date(val * 1000)).getDate();
     var filterData = hourlyForecastData.filter((d) => {
@@ -71,7 +78,7 @@ export default class App extends Component {
     if (filterData.length !== 8) {
       filterData = hourlyForecastData.slice(0, 8);
     }
-    this.setState({showBreakdown: true, breakdownData: filterData});
+    this.setState({showBreakdown: true, breakdownData: filterData, currentBreakdown: val});
   }
 
   componentDidMount() {
@@ -90,7 +97,7 @@ export default class App extends Component {
       city = `${data.city.name}, ${data.city.country}`;
       cards = data.list.map((d) => {
         return (
-            <Card key={d.dt} city={city} data={d} units={this.state.units} onClick={this.onClickSeeMore.bind(this, d.dt)}/>
+            <Card key={d.dt} city={city} data={d} units={this.state.units} onClick={this.seeHourly.bind(this, d.dt)}/>
         );
       });
     }
@@ -118,7 +125,17 @@ export default class App extends Component {
         </div>
         {this.state.showBreakdown? (
           <div style={{backgroundColor: 'grey', padding: 16}}>
-            <div style={{color: "white"}}> 3 Hourly Breakup </div>
+            <div style={{color: "white"}}> 3 Hourly Breakup
+              <Button style={{marginLeft: 16}} size="small" variant="contained" color="default"  onClick={
+                () => {
+                  this.setState({showBreakdown: false})
+                }}>
+
+                <VisibilityOffIcon />
+              </Button>
+
+
+              </div>
             {forecastTable}
           </div>
         ) : null}
