@@ -5,10 +5,11 @@ import Switch from '@material-ui/core/Switch';
 import SimpleTable from './Table';
 import Button from '@material-ui/core/Button';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import Config from './Config';
 
 const api = axios.create({
-  baseURL: "https://api.openweathermap.org/data/2.5/",
-  params: { appid: "0fc47171c38320af914c66f014c03d1d" },
+  baseURL: Config.api.baseurl,
+  params: { appid: Config.api.appid },
 });
 
 export default class App extends Component {
@@ -28,7 +29,7 @@ export default class App extends Component {
   getDailyBreakup() {
     api.get("/forecast/daily", {
       params: {
-        id: "1275004",
+        id: Config.cityID,
         units: this.state.units,
         cnt: 5
       }
@@ -42,7 +43,7 @@ export default class App extends Component {
   getHourlyBreakUp() {
     api.get("/forecast", {
       params: {
-        id: "1275004",
+        id: Config.cityID,
         units: this.state.units,
       }
     }).then((res) => {
@@ -104,7 +105,7 @@ export default class App extends Component {
       city = `${data.city.name}, ${data.city.country}`;
       cards = data.list.map((d) => {
         return (
-            <Card key={d.dt} city={city} data={d} units={this.state.units} onClick={this.seeHourly.bind(this, d.dt)}/>
+            <Card key={d.dt} data={d} units={this.state.units} onClick={this.seeHourly.bind(this, d.dt)}/>
         );
       });
     }
@@ -117,7 +118,7 @@ export default class App extends Component {
 
     return (
       <div style={{textAlign: 'center'}}>
-          <h1> Weather Forecast Kolkata, India</h1>
+          <h1> Weather Forecast {city}</h1>
           <div style={{position: 'absolute', right: 20, top: 20, zIndex: 4000}}>
              &#8451;
             <Switch

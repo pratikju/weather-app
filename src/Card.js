@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Typography from '@material-ui/core/Typography';
 import Util from './Util';
+import Config from './Config';
 
 const styles = theme => ({
   card: {
@@ -53,7 +54,7 @@ function SimpleCard(props) {
           <div style={{fontSize: 16, display: 'inline-block'}}>{bull} {data.temp.min.toFixed(0)}{scale.temp}</div>
         </Typography>
         <Typography variant="subheading" gutterBottom>
-          <img id="wicon" src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather icon" /><br/>
+          <img id="wicon" src={`${Config.api.imageurl}${data.weather[0].icon}.png`} alt="Weather icon" /><br/>
           {data.weather[0].description}
         </Typography>
       </CardContent>

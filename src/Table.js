@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Util from './Util';
+import Config from './Config';
 
 const styles = theme => ({
   root: {
@@ -42,7 +43,7 @@ function SimpleTable(props) {
                 <TableCell component="th" scope="row"></TableCell>
                 {props.data.map( d => {
                   return (<TableCell key={`icon_${d.dt}`} numeric>
-                    <img src={`https://openweathermap.org/img/w/${d.weather[0].icon}.png`} alt="Weather icon" />
+                    <img src={`${Config.api.imageurl}${d.weather[0].icon}.png`} alt="Weather icon" />
                   </TableCell>)
                 })}
             </TableRow>

@@ -7,15 +7,18 @@ Here is the latest addition to the weather apps available in the open source com
 
 ## Manual Installation
 
-  Assuming a `Node.js` environment with the latest version installed,
+  Assuming a [Node.js](https://nodejs.org/en/) environment with the latest version installed,
   ```sh
   $ git clone https://github.com/pratikju/weather-app.git
+  $ cd weather-app
   $ npm install
   $ npm start
   ```
   Go to `localhost:3000` and you will see the weather of Kolkata, India
 
 ## Deploying to github pages
+
+  From project root directory,
 
   ```sh
   $ npm run deploy
