@@ -12,7 +12,7 @@ import Util from './Util';
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 2,
     overflowX: 'auto',
   },
   table: {
@@ -22,6 +22,7 @@ const styles = theme => ({
 
 function SimpleTable(props) {
   const { classes } = props;
+  const scale = Util.getScale(props.units);
 
   return (
     <Paper className={classes.root}>
@@ -57,10 +58,10 @@ function SimpleTable(props) {
             </TableRow>
             <TableRow>
               <TableCell variant="head" component="th" scope="row">
-                {'Temp'}
+                {'Temp'} ({scale.temp})
               </TableCell>
                 {props.data.map( d => {
-                  return <TableCell numeric>{d.main.temp}&deg;</TableCell>
+                  return <TableCell numeric>{d.main.temp.toFixed(0)}&deg;</TableCell>
                 })}
             </TableRow>
             <TableRow>
@@ -73,7 +74,7 @@ function SimpleTable(props) {
             </TableRow>
             <TableRow>
               <TableCell variant="head" component="th" scope="row">
-                {'Wind'}
+                {'Wind'} ({scale.wind})
               </TableCell>
                 {props.data.map( d => {
                   return <TableCell numeric>{d.wind.speed}</TableCell>

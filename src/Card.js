@@ -54,15 +54,11 @@ function SimpleCard(props) {
           <div style={{fontSize: 16, display: 'inline-block'}}>{bull} {data.temp.min.toFixed(0)}{scale.temp}</div>
         </Typography>
 
-        <Typography variant="caption" gutterBottom>
+        <Typography variant="subheading" gutterBottom>
           <img id="wicon" src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather icon" /><br/>
           {data.weather[0].description}
         </Typography>
 
-        <Typography component="p">
-          humidity: {data.humidity}% <br/>
-          wind: {data.speed} {scale.wind}<br/>
-        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small" color="primary" onClick={props.onClick}>See Hourly</Button>

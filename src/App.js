@@ -9,7 +9,7 @@ const api = axios.create({
   params: { appid: "0fc47171c38320af914c66f014c03d1d" },
 });
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,7 +22,7 @@ class App extends Component {
     }
   }
 
-  getWeatherDetails() {
+  getDailyBreakup() {
     api.get("/forecast/daily", {
       params: {
         id: "1275004",
@@ -36,7 +36,7 @@ class App extends Component {
     })
   }
 
-  getDailyBreakUp() {
+  getHourlyBreakUp() {
     api.get("/forecast", {
       params: {
         id: "1275004",
@@ -49,11 +49,6 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-    this.getWeatherDetails();
-    this.getDailyBreakUp();
-  }
-
   onScaleSwitch() {
     const {units} = this.state;
     const toggler = {
@@ -61,8 +56,8 @@ class App extends Component {
       'imperial': 'metric'
     }
     this.setState({units: toggler[units], showBreakdown: false}, () => {
-      this.getWeatherDetails();
-      this.getDailyBreakUp();
+      this.getDailyBreakup();
+      this.getHourlyBreakUp();
     });
   }
 
@@ -79,9 +74,18 @@ class App extends Component {
     this.setState({showBreakdown: true, breakdownData: filterData});
   }
 
+  componentDidMount() {
+    this.getDailyBreakup();
+    this.getHourlyBreakUp();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.units === nextState.units;
+  }
+
   render() {
     const data = this.state.forecastData;
-    let city, cards;
+    let city, cards, forecastTable;
     if (data !== undefined) {
       city = `${data.city.name}, ${data.city.country}`;
       cards = data.list.map((d) => {
@@ -91,18 +95,17 @@ class App extends Component {
       });
     }
 
-    var forecastTable;
-
     if (this.state.breakdownData !== undefined) {
        forecastTable = (
-        <SimpleTable data={this.state.breakdownData}/>
+        <SimpleTable data={this.state.breakdownData} units={this.state.units}/>
       );
     }
 
     return (
       <div style={{textAlign: 'center'}}>
-          <div>
-            <h1> Weather Forecast Kolkata, India</h1> &#8451;
+          <h1> Weather Forecast Kolkata, India</h1>
+          <div style={{position: 'absolute', right: 20, top: 20, zIndex: 4000}}>
+             &#8451;
             <Switch
               value={this.state.units}
               onChange={this.onScaleSwitch.bind(this)}
@@ -110,12 +113,12 @@ class App extends Component {
             />
             &#8457;
           </div>
-        <div style={{backgroundColor: '#ffffff', display: 'flex', alignItems: 'flex-start', padding: 32}}>
+        <div style={{backgroundColor: '#ffffff', display: 'flex', alignItems: 'flex-start', padding: 32, paddingTop: 0}}>
             {cards}
         </div>
         {this.state.showBreakdown? (
           <div style={{backgroundColor: 'grey', padding: 16}}>
-            <h3 style={{color: "white"}}> 3 Hourly Breakup </h3>
+            <div style={{color: "white"}}> 3 Hourly Breakup </div>
             {forecastTable}
           </div>
         ) : null}
@@ -124,5 +127,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
