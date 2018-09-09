@@ -91,6 +91,13 @@ export default class App extends Component {
   }
 
   render() {
+    if (this.state.error) {
+      return (<div style={{textAlign: 'center'}}>
+          <h1> Oops! Something went wrong!</h1>
+        </div>
+      );
+    }
+
     const data = this.state.forecastData;
     let city, cards, forecastTable;
     if (data !== undefined) {
@@ -126,16 +133,13 @@ export default class App extends Component {
         {this.state.showBreakdown? (
           <div style={{backgroundColor: 'grey', padding: 16}}>
             <div style={{color: "white"}}> 3 Hourly Breakup
-              <Button style={{marginLeft: 16}} size="small" variant="contained" color="default"  onClick={
-                () => {
+              <Button style={{marginLeft: 16}} size="small" variant="contained" color="default"
+                onClick={() => {
                   this.setState({showBreakdown: false})
                 }}>
-
                 <VisibilityOffIcon />
               </Button>
-
-
-              </div>
+            </div>
             {forecastTable}
           </div>
         ) : null}

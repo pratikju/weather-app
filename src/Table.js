@@ -32,7 +32,6 @@ function SimpleTable(props) {
             <TableCell component="th" scope="row">
               {Util.getDate(props.data[0].dt).day}
             </TableCell>
-
             {props.data.map( d => {
               return (<TableCell key={`hours_${d.dt}`} numeric>{Util.getHour(d.dt)}</TableCell>)
             })}
@@ -40,8 +39,7 @@ function SimpleTable(props) {
         </TableHead>
         <TableBody>
             <TableRow>
-                <TableCell component="th" scope="row">
-                </TableCell>
+                <TableCell component="th" scope="row"></TableCell>
                 {props.data.map( d => {
                   return (<TableCell key={`icon_${d.dt}`} numeric>
                     <img src={`https://openweathermap.org/img/w/${d.weather[0].icon}.png`} alt="Weather icon" />
@@ -80,7 +78,6 @@ function SimpleTable(props) {
                   return <TableCell key={`wind_${d.dt}`} numeric>{d.wind.speed}</TableCell>
                 })}
             </TableRow>
-
         </TableBody>
       </Table>
     </Paper>

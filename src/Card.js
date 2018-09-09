@@ -34,12 +34,9 @@ const styles = theme => ({
 
 
 function SimpleCard(props) {
-  const { classes } = props;
+  const { classes, data } = props;
   const bull = <span className={classes.bullet}>•</span>;
-
-  const data = props.data;
   const dateObj = Util.getDate(data.dt);
-
   const scale = Util.getScale(props.units);
 
   return (
@@ -55,15 +52,12 @@ function SimpleCard(props) {
           {data.temp.max.toFixed(0)}<sup style={{fontSize: 16}}>{scale.temp}</sup>
           <div style={{fontSize: 16, display: 'inline-block'}}>{bull} {data.temp.min.toFixed(0)}{scale.temp}</div>
         </Typography>
-
         <Typography variant="subheading" gutterBottom>
           <img id="wicon" src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather icon" /><br/>
           {data.weather[0].description}
         </Typography>
-
       </CardContent>
       <CardActions>
-
         <Button color="primary" onClick={props.onClick}>
           See Hourly
           <SendIcon className={classes.rightIcon} />
