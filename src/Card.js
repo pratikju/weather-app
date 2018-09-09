@@ -51,7 +51,7 @@ function SimpleCard(props) {
         </Typography>
         <Typography variant="display1">
           {data.temp.max.toFixed(0)}<sup style={{fontSize: 16}}>{scale.temp}</sup>
-          <div style={{fontSize: 16, display: 'inline-block'}}>/ {data.temp.min.toFixed(0)}{scale.temp}</div>
+          <div style={{fontSize: 16, display: 'inline-block'}}>{bull} {data.temp.min.toFixed(0)}{scale.temp}</div>
         </Typography>
 
         <Typography variant="caption" gutterBottom>

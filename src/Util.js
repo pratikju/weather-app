@@ -9,6 +9,14 @@ export default class Util {
     }
   }
 
+  static getHour(ts) {
+    var hours = (new Date(ts * 1000)).getHours() - 2;
+    var subscript = hours < 12 ? 'AM' : 'PM';
+    var value = hours % 12 || 12;
+
+    return `${value} ${subscript}`;
+  }
+
   static getScale(unit) {
     const scaleMap= {
       'metric': {

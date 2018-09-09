@@ -74,7 +74,7 @@ class App extends Component {
         return d_day === curr_day;
     });
     if (filterData.length !== 8) {
-      filterData = hourlyForecastData.slice(0, 8)
+      filterData = hourlyForecastData.slice(0, 8);
     }
     this.setState({showBreakdown: true, breakdownData: filterData});
   }

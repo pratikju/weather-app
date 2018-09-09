@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Util from './Util';
 
 const styles = theme => ({
   root: {
@@ -28,31 +29,26 @@ function SimpleTable(props) {
         <TableHead>
           <TableRow>
             <TableCell component="th" scope="row">
-              {'Saturday'}
+              {Util.getDate(props.data[0].dt).day}
             </TableCell>
-            <TableCell numeric>12 AM</TableCell>
-            <TableCell numeric>3 AM</TableCell>
-            <TableCell numeric>6 AM</TableCell>
-            <TableCell numeric>9 AM</TableCell>
-            <TableCell numeric>12 PM</TableCell>
-            <TableCell numeric>3 PM</TableCell>
-            <TableCell numeric>6 PM</TableCell>
-            <TableCell numeric>9 PM</TableCell>
+
+            {props.data.map( d => {
+              return (<TableCell numeric>{Util.getHour(d.dt)}</TableCell>)
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
             <TableRow>
                 <TableCell component="th" scope="row">
                 </TableCell>
-
                 {props.data.map( d => {
                   return (<TableCell numeric>
-                    <img id="wicon" src={`http://openweathermap.org/img/w/${d.weather[0].icon}.png`} alt="Weather icon" />
+                    <img src={`http://openweathermap.org/img/w/${d.weather[0].icon}.png`} alt="Weather icon" />
                   </TableCell>)
                 })}
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">
+              <TableCell variant="head" component="th" scope="row">
                 {'Forecast'}
               </TableCell>
                 {props.data.map( d => {
@@ -60,15 +56,15 @@ function SimpleTable(props) {
                 })}
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">
+              <TableCell variant="head" component="th" scope="row">
                 {'Temp'}
               </TableCell>
                 {props.data.map( d => {
-                  return <TableCell numeric>{d.main.temp}<sup>o</sup></TableCell>
+                  return <TableCell numeric>{d.main.temp}&deg;</TableCell>
                 })}
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">
+              <TableCell variant="head" component="th" scope="row">
                 {'Humidity'}
               </TableCell>
                 {props.data.map( d => {
@@ -76,7 +72,7 @@ function SimpleTable(props) {
                 })}
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">
+              <TableCell variant="head" component="th" scope="row">
                 {'Wind'}
               </TableCell>
                 {props.data.map( d => {
