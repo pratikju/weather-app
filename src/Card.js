@@ -57,7 +57,7 @@ function SimpleCard(props) {
         </Typography>
 
         <Typography variant="subheading" gutterBottom>
-          <img id="wicon" src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather icon" /><br/>
+          <img id="wicon" src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather icon" /><br/>
           {data.weather[0].description}
         </Typography>
 

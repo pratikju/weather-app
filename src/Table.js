@@ -44,7 +44,7 @@ function SimpleTable(props) {
                 </TableCell>
                 {props.data.map( d => {
                   return (<TableCell key={`icon_${d.dt}`} numeric>
-                    <img src={`http://openweathermap.org/img/w/${d.weather[0].icon}.png`} alt="Weather icon" />
+                    <img src={`https://openweathermap.org/img/w/${d.weather[0].icon}.png`} alt="Weather icon" />
                   </TableCell>)
                 })}
             </TableRow>
