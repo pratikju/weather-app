@@ -3,7 +3,7 @@
 Here is the latest addition to the weather apps available in the open source community. It is built using `React.js` and uses `OpenWeatherMap` API to get the weather forecast data.
 
 ## Demo
-  The project is deployed to github pages. See [Demo](https://pratikju.github.io/weather-app/)
+  The project is deployed to github pages. See [Demo](https://pratikju.github.io/weather-app)
 
 ## Manual Installation
 
