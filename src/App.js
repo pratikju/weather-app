@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 const api = axios.create({
-  baseURL: "http://api.openweathermap.org/data/2.5/",
+  baseURL: "https://api.openweathermap.org/data/2.5/",
   params: { appid: "0fc47171c38320af914c66f014c03d1d" },
 });
 
